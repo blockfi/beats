@@ -39,14 +39,31 @@ func init() {
 
 type Module struct {
 	mb.BaseModule
-	HostFS string // Mountpoint of the host's filesystem for use in monitoring inside a container.
+	HostFS string `config:"hostfs"` // Mountpoint of the host's filesystem for use in monitoring inside a container.
 }
 
 func NewModule(base mb.BaseModule) (mb.Module, error) {
 	// This only needs to be configured once for all system modules.
+
+	config := struct {
+		Hostfs string        `config:"hostfs"`
+	}{}
+
+	if err := base.UnpackConfig(&config); err != nil {
+		return nil, err
+	}
+
+	dir := *HostFS
+	if dir == "" {
+		dir := config.Hostfs
+		if dir == "" {
+			dir = "/"
+		}
+	}
+
 	once.Do(func() {
 		initModule()
 	})
 
-	return &Module{BaseModule: base, HostFS: *HostFS}, nil
+	return &Module{BaseModule: base, HostFS: dir}, nil
 }
