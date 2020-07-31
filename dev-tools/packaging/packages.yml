@@ -429,7 +429,7 @@ shared:
 
   - &elastic_docker_spec
     extra_vars:
-      repository: 'docker.elastic.co/beats'
+      repository: 'gregburd'
 
   #
   # License modifiers for Apache 2.0
