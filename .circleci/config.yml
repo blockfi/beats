@@ -19,7 +19,6 @@ jobs:
       - run:
           name: Make release
           command: |
-          environment:
             echo 'export PLATFORM=linux/amd64' >> $BASH_ENV
             echo 'export BEATS=metricbeat' >> $BASH_ENV
             source $BASH_ENV
