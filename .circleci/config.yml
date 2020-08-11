@@ -9,17 +9,8 @@ jobs:
       - setup_remote_docker:
           version: 18.06.0-ce
       - run: |
-          sudo apt -y update
-          sudo apt -y install python3 python3-venv
-      - run:
-          name: Beats dashboards
-          command: make beats-dashboards
-          environment:
-            PLATFORMS: linux/amd64
+           sudo apt -y install python3 python3-venv
       - run:
           name: Make release
           command: |
-            echo 'export PLATFORM=linux/amd64' >> $BASH_ENV
-            echo 'export BEATS=metricbeat' >> $BASH_ENV
-            source $BASH_ENV
-            PLATFORM=linux/amd64 BEATS=metricbeat make release
+             PLATFORM=linux/amd64 BEATS=metricbeat make release
