@@ -13,4 +13,4 @@ jobs:
       - run:
           name: Make release
           command: |
-             PLATFORM=linux/amd64 BEATS=metricbeat make release
+             PLATFORM=linux/amd64 make release
